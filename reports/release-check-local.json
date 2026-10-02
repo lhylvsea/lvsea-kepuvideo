@@ -1,0 +1,16 @@
+{
+  "status": "pass",
+  "phase": "local",
+  "package": "lvsea-kepuvideo",
+  "version": "0.1.0",
+  "checks": {
+    "python_unit_tests": "pass",
+    "trigger_eval": "13/13",
+    "context_budget": "production",
+    "package_validator": "pass",
+    "discoverability_and_clean_install_gate": "pass",
+    "provider_and_human_video_evidence": "missing evidence by design"
+  },
+  "note": "Remote repository, PR, Release and isolated npx installation are verified separately after publication."
+}
+

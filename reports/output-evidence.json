@@ -1,0 +1,14 @@
+{
+  "evidence_kind": "static_package_only",
+  "ok": false,
+  "status": "missing evidence",
+  "scope": "skill package and deterministic validation only",
+  "missing": [
+    "provider-backed TTS output",
+    "HyperFrames render",
+    "independent human visual review",
+    "real client telemetry"
+  ],
+  "note": "Static package checks do not prove the quality of a generated video."
+}
+

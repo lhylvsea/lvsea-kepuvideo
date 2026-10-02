@@ -1,0 +1,182 @@
+{
+  "schema_version": "3.0.0-lvsea",
+  "generated_at": "2026-10-03",
+  "package": {
+    "name": "lvsea-kepuvideo",
+    "version": "0.1.0",
+    "owner": "海洋哥 / lhylvsea",
+    "maturity_tier": "governed",
+    "lifecycle_stage": "library",
+    "upstream_inspiration": "https://x.com/yyn1748762/status/2105835330406654424; https://github.com/heygen-com/hyperframes; https://github.com/lhylvsea/lvsea-writing; https://github.com/lhylvsea/lvsea-video"
+  },
+  "intent": {
+    "description": "为 Codex 提供中文科普知识视频的可复用 Skill：从主题、文章、网页或脚本建立事实底稿和内容简报，调用 lvsea-writing 做口播化与最后去 AI 味，用 Edge TTS 试听并生成配音与 SRT，依据真实时间轴设计 HyperFrames 分镜，经过预览、局部修订、媒体检查和最终渲染后交付 MP4、字幕、音频与可编辑工程。用户说“使用 lvsea-kepuvideo”、制作 X 秒科普视频、知识讲解视频、主题转视频或文章转科普视频时使用；遇到事实、权限、时长、声音或风格的关键歧义时保留 $grilling 设计树提问。不要用于一次性只写脚本或提示词、手绘/拼贴风、已有口播素材剪辑、产品发布、数字人、或只做字幕的小改。",
+    "job_to_be_done": "把中文科普主题、文章或脚本转成以真实配音时间轴驱动的 HyperFrames 知识视频工程，并在最后用 lvsea-writing 做事实保真的口播去模板编辑。",
+    "target_users": [
+      "海洋哥",
+      "中文科普内容作者",
+      "制造业知识传播者",
+      "Codex/Agent Skill 使用者"
+    ],
+    "inputs": [
+      "topic",
+      "article",
+      "web_source",
+      "script",
+      "authorized_assets",
+      "target_duration",
+      "audience",
+      "format_requirements"
+    ],
+    "outputs": [
+      "brief",
+      "article",
+      "evidence ledger",
+      "script",
+      "writing review",
+      "voice previews",
+      "voice audio",
+      "SRT",
+      "storyboard",
+      "HyperFrames project",
+      "preview",
+      "final MP4",
+      "QA report"
+    ],
+    "exclusions": [
+      "AI detector evasion",
+      "fabricated facts or experience",
+      "handdrawn or collage style",
+      "existing-footage editing",
+      "avatar or voice cloning",
+      "automatic paid provider calls",
+      "automatic social publishing",
+      "one-off prompt-only requests"
+    ]
+  },
+  "triggers": {
+    "should_trigger": [
+      "使用 lvsea-kepuvideo 制作一个 60 秒关于相对论的中文科普视频，先让我试听声音，再用 HyperFrames 做分镜和 SRT。",
+      "使用 lvsea-kepuvideo 把这篇文章改成 90 秒知识视频，先做口播、配音、真实时间轴和 HyperFrames 预览。",
+      "使用 lvsea-kepuvideo 制作 300 秒膨润土科普视频，保留事实，生成 voice.srt 和最终 MP4。",
+      "使用 lvsea-kepuvideo 修改知识视频 00:12 到 00:18 的 HyperFrames 画面，只改镜头不改配音和字幕时间轴。"
+    ],
+    "should_not_trigger": [
+      "只写一段关于膨润土的口播稿，不制作视频。",
+      "把现有口播素材剪辑加字幕，不需要从主题搭知识视频流程。",
+      "做一个白底蓝线手绘知识视频。",
+      "做一个 SaaS 产品发布视频，重点是网站演示。"
+    ],
+    "near_neighbor": [
+      "只要一份 300 秒膨润土视频的脚本和提示词，不要渲染 MP4。",
+      "只检查现有 MP4 的编码和字幕，不需要制作新视频。",
+      "使用通用 lvsea-video 剪一段已有访谈并加动态字幕。"
+    ],
+    "adversarial": [
+      "用自动化模板做一次知识视频，不要创建 skill。",
+      "给我能力清单即可，不要制作视频。"
+    ]
+  },
+  "workflow": {
+    "router_rules": [],
+    "core_workflow": [],
+    "modes_and_gates": [],
+    "output_contract": [],
+    "failure_modes": [
+      "只读取用户授权的网页、文件和媒体；网页标题或搜索摘要不能替代正文。",
+      "原始材料、私有脚本、Cookie、Token、声音授权证明和个人信息不写入 Skill 仓库或公开报告。",
+      "'lvsea-writing' 的“去 AI 味”是事实保真的最后编辑层，不是检测器规避器；不得编造经历、数字、引用、案例或产品能力。",
+      "默认不上传素材、不调用收费 provider、不克隆真人声音、不发布到社交平台；这些动作必须在任务中明确授权并记录。",
+      "目标仓库只发布抽象规则、验证脚本和匿名示例，不发布本次项目的文章、音频、视频、截图或临时绝对路径。"
+    ]
+  },
+  "resources": {
+    "references": [
+      "references/qa-and-trust.md",
+      "references/workflow.md",
+      "references/writing-adapter.md"
+    ],
+    "scripts": [
+      "scripts/validate_skill.py",
+      "scripts/verify_project.py",
+      "scripts/verify_video_output.py"
+    ],
+    "evals": [
+      "evals/trigger_cases.json"
+    ],
+    "reports": [
+      "reports/context-budget.json",
+      "reports/creation-handoff.md",
+      "reports/output-evidence.json",
+      "reports/prior-art-research.md",
+      "reports/release-check-local.json",
+      "reports/skill-ir.json",
+      "reports/source-process.md",
+      "reports/trigger-eval.json"
+    ],
+    "schemas": []
+  },
+  "risk": {
+    "output_risk": "medium",
+    "execution_risk": "medium",
+    "trust_boundary": "user-source-local-tools-and-explicit-providers",
+    "permissions": {
+      "network": "read-only source research by default; TTS/provider/network uploads only when explicitly required and authorized",
+      "file_write": "write only the requested video project and this package during package creation",
+      "subprocess": "local Python checks, edge-tts, ffmpeg/ffprobe and installed HyperFrames commands; do not run unreviewed remote installers",
+      "secrets": "read provider credentials only from environment variables when explicitly authorized; never write them to artifacts"
+    }
+  },
+  "governance": {
+    "owner": "海洋哥 / lhylvsea",
+    "maturity": "governed",
+    "lifecycle_stage": "library",
+    "review_cadence": "quarterly",
+    "review_due": "2027-01-03",
+    "rollback_boundary": "feature branch and immutable semver release; local sync is recoverable"
+  },
+  "portability": {
+    "canonical_format": "agent-skills",
+    "adapter_targets": [
+      "openai",
+      "generic",
+      "claude",
+      "agent-skills-compatible",
+      "vscode"
+    ],
+    "activation": {
+      "mode": "manual",
+      "paths": []
+    },
+    "execution": {
+      "context": "inline",
+      "shell": "powershell-or-bash"
+    },
+    "trust": {
+      "source_tier": "local",
+      "remote_inline_execution": "forbid",
+      "remote_metadata_policy": "allow read-only source review; forbid unreviewed execution",
+      "generated_public_claims": "evidence-bound"
+    },
+    "permissions": {
+      "network": "source research and explicitly authorized provider calls only",
+      "file_write": "requested project artifacts and package files only",
+      "subprocess": "installed local tools only; no hidden paid calls",
+      "interactive": "required for voice, storyboard, preview, cost, license or factual decisions"
+    },
+    "degradation": {
+      "openai": "metadata-adapter",
+      "claude": "neutral-source-plus-adapter",
+      "generic": "neutral-source",
+      "agent-skills-compatible": "canonical-source",
+      "vscode": "neutral-source-plus-review-notes"
+    }
+  },
+  "evidence_boundary": {
+    "local_validation_is_evidence": true,
+    "trigger_fixture_is_evidence": true,
+    "provider_or_human_output_evidence": false,
+    "missing_external_or_human_evidence_label": "missing evidence",
+    "public_claim_policy": "claim only what named package, trigger, runtime, install, provider, or human evidence supports"
+  }
+}

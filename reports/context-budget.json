@@ -1,0 +1,96 @@
+{
+  "ok": true,
+  "status": "pass",
+  "reason": "root SKILL.md is 10048 bytes within production budget",
+  "tier": "production",
+  "root_skill_bytes": 10048,
+  "root_budget_bytes": {
+    "root_warn": 14000,
+    "root_block": 20000
+  },
+  "resource_bytes": {
+    "references": 14201,
+    "scripts": 17968,
+    "evals": 3201,
+    "reports": 26540
+  },
+  "total_measured_bytes": 71958,
+  "files": [
+    {
+      "path": "references/qa-and-trust.md",
+      "bytes": 3573,
+      "on_demand": true
+    },
+    {
+      "path": "references/workflow.md",
+      "bytes": 7078,
+      "on_demand": true
+    },
+    {
+      "path": "references/writing-adapter.md",
+      "bytes": 3550,
+      "on_demand": true
+    },
+    {
+      "path": "scripts/validate_skill.py",
+      "bytes": 7816,
+      "on_demand": false
+    },
+    {
+      "path": "scripts/verify_project.py",
+      "bytes": 4452,
+      "on_demand": false
+    },
+    {
+      "path": "scripts/verify_video_output.py",
+      "bytes": 5700,
+      "on_demand": false
+    },
+    {
+      "path": "evals/trigger_cases.json",
+      "bytes": 3201,
+      "on_demand": false
+    },
+    {
+      "path": "reports/context-budget.json",
+      "bytes": 2122,
+      "on_demand": true
+    },
+    {
+      "path": "reports/creation-handoff.md",
+      "bytes": 2703,
+      "on_demand": true
+    },
+    {
+      "path": "reports/output-evidence.json",
+      "bytes": 384,
+      "on_demand": true
+    },
+    {
+      "path": "reports/prior-art-research.md",
+      "bytes": 4385,
+      "on_demand": true
+    },
+    {
+      "path": "reports/release-check-local.json",
+      "bytes": 489,
+      "on_demand": true
+    },
+    {
+      "path": "reports/skill-ir.json",
+      "bytes": 8040,
+      "on_demand": true
+    },
+    {
+      "path": "reports/source-process.md",
+      "bytes": 2010,
+      "on_demand": true
+    },
+    {
+      "path": "reports/trigger-eval.json",
+      "bytes": 6407,
+      "on_demand": true
+    }
+  ],
+  "missing_evidence": "context size does not prove output quality or runtime performance"
+}

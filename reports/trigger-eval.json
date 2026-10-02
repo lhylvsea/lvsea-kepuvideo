@@ -1,0 +1,219 @@
+{
+  "ok": true,
+  "threshold": 0.5,
+  "description_concepts": [
+    "authoring_action",
+    "skill",
+    "source_material",
+    "workflow"
+  ],
+  "missing_description_concepts": [],
+  "summary": {
+    "total": 13,
+    "passed": 13,
+    "false_positive": 0,
+    "false_negative": 0,
+    "pass_rate": 1.0
+  },
+  "bucket_summary": {
+    "should_trigger": {
+      "total": 4,
+      "passed": 4
+    },
+    "should_not_trigger": {
+      "total": 4,
+      "passed": 4
+    },
+    "near_neighbor": {
+      "total": 3,
+      "passed": 3
+    },
+    "adversarial": {
+      "total": 2,
+      "passed": 2
+    }
+  },
+  "failures": [],
+  "results": {
+    "should_trigger": [
+      {
+        "prompt": "使用 lvsea-kepuvideo 制作一个 60 秒关于相对论的中文科普视频，先让我试听声音，再用 HyperFrames 做分镜和 SRT。",
+        "family": "explicit-topic-to-video",
+        "expected_trigger": true,
+        "predicted_trigger": true,
+        "passed": true,
+        "score": 1.0,
+        "matched_concepts": [
+          "authoring_action",
+          "skill",
+          "source_material",
+          "workflow"
+        ],
+        "negative_pattern": null
+      },
+      {
+        "prompt": "使用 lvsea-kepuvideo 把这篇文章改成 90 秒知识视频，先做口播、配音、真实时间轴和 HyperFrames 预览。",
+        "family": "explicit-article-to-video",
+        "expected_trigger": true,
+        "predicted_trigger": true,
+        "passed": true,
+        "score": 1.0,
+        "matched_concepts": [
+          "authoring_action",
+          "skill",
+          "source_material",
+          "workflow"
+        ],
+        "negative_pattern": null
+      },
+      {
+        "prompt": "使用 lvsea-kepuvideo 制作 300 秒膨润土科普视频，保留事实，生成 voice.srt 和最终 MP4。",
+        "family": "long-form-manufacturing-topic",
+        "expected_trigger": true,
+        "predicted_trigger": true,
+        "passed": true,
+        "score": 1.0,
+        "matched_concepts": [
+          "authoring_action",
+          "skill",
+          "source_material",
+          "workflow"
+        ],
+        "negative_pattern": null
+      },
+      {
+        "prompt": "使用 lvsea-kepuvideo 修改知识视频 00:12 到 00:18 的 HyperFrames 画面，只改镜头不改配音和字幕时间轴。",
+        "family": "scoped-video-revision",
+        "expected_trigger": true,
+        "predicted_trigger": true,
+        "passed": true,
+        "score": 1.0,
+        "matched_concepts": [
+          "skill",
+          "source_material",
+          "workflow"
+        ],
+        "negative_pattern": null
+      }
+    ],
+    "should_not_trigger": [
+      {
+        "prompt": "只写一段关于膨润土的口播稿，不制作视频。",
+        "family": "copy-only",
+        "expected_trigger": false,
+        "predicted_trigger": false,
+        "passed": true,
+        "score": 1.0,
+        "matched_concepts": [
+          "authoring_action",
+          "source_material",
+          "workflow"
+        ],
+        "negative_pattern": "只写"
+      },
+      {
+        "prompt": "把现有口播素材剪辑加字幕，不需要从主题搭知识视频流程。",
+        "family": "existing-footage-edit",
+        "expected_trigger": false,
+        "predicted_trigger": false,
+        "passed": true,
+        "score": 0.667,
+        "matched_concepts": [
+          "source_material",
+          "workflow"
+        ],
+        "negative_pattern": null
+      },
+      {
+        "prompt": "做一个白底蓝线手绘知识视频。",
+        "family": "handdrawn-neighbor",
+        "expected_trigger": false,
+        "predicted_trigger": false,
+        "passed": true,
+        "score": 0.333,
+        "matched_concepts": [
+          "source_material"
+        ],
+        "negative_pattern": "手绘"
+      },
+      {
+        "prompt": "做一个 SaaS 产品发布视频，重点是网站演示。",
+        "family": "product-launch-neighbor",
+        "expected_trigger": false,
+        "predicted_trigger": false,
+        "passed": true,
+        "score": 0.333,
+        "matched_concepts": [
+          "source_material"
+        ],
+        "negative_pattern": "产品发布"
+      }
+    ],
+    "near_neighbor": [
+      {
+        "prompt": "只要一份 300 秒膨润土视频的脚本和提示词，不要渲染 MP4。",
+        "family": "prompt-only",
+        "expected_trigger": false,
+        "predicted_trigger": false,
+        "passed": true,
+        "score": 0.667,
+        "matched_concepts": [
+          "authoring_action",
+          "source_material"
+        ],
+        "negative_pattern": null
+      },
+      {
+        "prompt": "只检查现有 MP4 的编码和字幕，不需要制作新视频。",
+        "family": "media-check-only",
+        "expected_trigger": false,
+        "predicted_trigger": false,
+        "passed": true,
+        "score": 0.667,
+        "matched_concepts": [
+          "authoring_action",
+          "source_material"
+        ],
+        "negative_pattern": "只检查"
+      },
+      {
+        "prompt": "使用通用 lvsea-video 剪一段已有访谈并加动态字幕。",
+        "family": "broader-video-neighbor",
+        "expected_trigger": false,
+        "predicted_trigger": false,
+        "passed": true,
+        "score": 0.0,
+        "matched_concepts": [],
+        "negative_pattern": null
+      }
+    ],
+    "adversarial": [
+      {
+        "prompt": "用自动化模板做一次知识视频，不要创建 skill。",
+        "family": "automation-keyword-trap",
+        "expected_trigger": false,
+        "predicted_trigger": false,
+        "passed": true,
+        "score": 0.667,
+        "matched_concepts": [
+          "skill",
+          "source_material"
+        ],
+        "negative_pattern": "不要创建 skill"
+      },
+      {
+        "prompt": "给我能力清单即可，不要制作视频。",
+        "family": "capability-keyword-trap",
+        "expected_trigger": false,
+        "predicted_trigger": false,
+        "passed": true,
+        "score": 0.667,
+        "matched_concepts": [
+          "authoring_action",
+          "source_material"
+        ],
+        "negative_pattern": null
+      }
+    ]
+  }
+}
