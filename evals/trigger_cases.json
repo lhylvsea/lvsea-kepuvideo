@@ -1,0 +1,97 @@
+{
+  "recommended_threshold": 0.5,
+  "description_required_concepts": ["skill", "source_material", "authoring_action"],
+  "positive_concepts": {
+    "skill": ["lvsea-kepuvideo", "skill", "技能"],
+    "source_material": ["科普", "知识视频", "主题", "文章", "脚本", "视频"],
+    "authoring_action": ["制作", "生成", "渲染", "转成", "改成"],
+    "workflow": ["HyperFrames", "SRT", "配音", "分镜", "口播", "时间轴"]
+  },
+  "negative_patterns": [
+    "只写",
+    "一次性",
+    "手绘",
+    "拼贴",
+    "已有口播",
+    "产品发布",
+    "只加字幕",
+    "只检查",
+    "不制作视频",
+    "不要创建 skill",
+    "自动化模板"
+  ],
+  "should_trigger": [
+    {
+      "text": "使用 lvsea-kepuvideo 制作一个 60 秒关于相对论的中文科普视频，先让我试听声音，再用 HyperFrames 做分镜和 SRT。",
+      "family": "explicit-topic-to-video",
+      "min_concept_matches": 3
+    },
+    {
+      "text": "使用 lvsea-kepuvideo 把这篇文章改成 90 秒知识视频，先做口播、配音、真实时间轴和 HyperFrames 预览。",
+      "family": "explicit-article-to-video",
+      "min_concept_matches": 3
+    },
+    {
+      "text": "使用 lvsea-kepuvideo 制作 300 秒膨润土科普视频，保留事实，生成 voice.srt 和最终 MP4。",
+      "family": "long-form-manufacturing-topic",
+      "min_concept_matches": 3
+    },
+    {
+      "text": "使用 lvsea-kepuvideo 修改知识视频 00:12 到 00:18 的 HyperFrames 画面，只改镜头不改配音和字幕时间轴。",
+      "family": "scoped-video-revision",
+      "min_concept_matches": 3
+    }
+  ],
+  "should_not_trigger": [
+    {
+      "text": "只写一段关于膨润土的口播稿，不制作视频。",
+      "family": "copy-only",
+      "min_concept_matches": 3
+    },
+    {
+      "text": "把现有口播素材剪辑加字幕，不需要从主题搭知识视频流程。",
+      "family": "existing-footage-edit",
+      "min_concept_matches": 3
+    },
+    {
+      "text": "做一个白底蓝线手绘知识视频。",
+      "family": "handdrawn-neighbor",
+      "min_concept_matches": 3
+    },
+    {
+      "text": "做一个 SaaS 产品发布视频，重点是网站演示。",
+      "family": "product-launch-neighbor",
+      "min_concept_matches": 3
+    }
+  ],
+  "near_neighbor": [
+    {
+      "text": "只要一份 300 秒膨润土视频的脚本和提示词，不要渲染 MP4。",
+      "family": "prompt-only",
+      "min_concept_matches": 3
+    },
+    {
+      "text": "只检查现有 MP4 的编码和字幕，不需要制作新视频。",
+      "family": "media-check-only",
+      "min_concept_matches": 3
+    },
+    {
+      "text": "使用通用 lvsea-video 剪一段已有访谈并加动态字幕。",
+      "family": "broader-video-neighbor",
+      "min_concept_matches": 3
+    }
+  ],
+  "adversarial": [
+    {
+      "text": "用自动化模板做一次知识视频，不要创建 skill。",
+      "family": "automation-keyword-trap",
+      "min_concept_matches": 3
+    },
+    {
+      "text": "给我能力清单即可，不要制作视频。",
+      "family": "capability-keyword-trap",
+      "min_concept_matches": 3
+    }
+  ]
+}
+

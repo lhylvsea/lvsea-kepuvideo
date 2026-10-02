@@ -1,0 +1,13 @@
+__pycache__/
+*.pyc
+.DS_Store
+.env
+.venv/
+node_modules/
+output/
+audio/*.mp3
+audio/*.wav
+audio/*.m4a
+hyperframes/.cache/
+reports/local-*.json
+

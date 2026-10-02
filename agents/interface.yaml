@@ -1,0 +1,65 @@
+interface:
+  display_name: "Lvsea 科普视频"
+  short_description: "中文科普主题到 HyperFrames 成片的分阶段视频工作流"
+  default_prompt: "使用 $lvsea-kepuvideo，先建立事实底稿和口播稿，再调用 $lvsea-writing 做最后去 AI 味，试听选声、生成真实 SRT 时间轴、设计 HyperFrames 分镜，完成预览与 QA 后再渲染 MP4；有关键歧义时保留 $grilling。"
+  examples:
+    - "使用 lvsea-kepuvideo 制作 60 秒相对论知识视频，先让我试听声音。"
+    - "使用 lvsea-kepuvideo 制作 300 秒膨润土科普视频，面向制造业管理者。"
+    - "使用 lvsea-kepuvideo 把这篇文章变成有 SRT 和 HyperFrames 工程的知识视频。"
+    - "使用 lvsea-kepuvideo 修改预览的 00:12–00:18，只改画面不改时间轴。"
+
+policy:
+  allow_implicit_invocation: false
+
+compatibility:
+  canonical_format: "agent-skills"
+  adapter_targets:
+    - "openai"
+    - "generic"
+    - "claude"
+    - "agent-skills-compatible"
+    - "vscode"
+  activation:
+    mode: "manual"
+    paths: []
+  execution:
+    context: "inline"
+    shell: "powershell-or-bash"
+  trust:
+    source_tier: "local"
+    remote_inline_execution: "forbid"
+    remote_metadata_policy: "allow read-only source review; forbid unreviewed execution"
+    generated_public_claims: "evidence-bound"
+  permissions:
+    network: "source research and explicitly authorized provider calls only"
+    file_write: "requested project artifacts and package files only"
+    subprocess: "installed local tools only; no hidden paid calls"
+    interactive: "required for voice, storyboard, preview, cost, license or factual decisions"
+  degradation:
+    openai: "metadata-adapter"
+    claude: "neutral-source-plus-adapter"
+    generic: "neutral-source"
+    agent-skills-compatible: "canonical-source"
+    vscode: "neutral-source-plus-review-notes"
+
+gates:
+  intake:
+    - "topic/source, target duration, audience and one core question"
+    - "source, copyright and provider permission boundaries"
+  content:
+    - "article fact check"
+    - "readable script"
+    - "lvsea-writing final editing pass"
+  media:
+    - "voice preview selection"
+    - "voice.mp3 and voice.srt duration alignment"
+    - "storyboard uses real SRT timecodes"
+  render:
+    - "HyperFrames lint/validate/inspect"
+    - "manual preview review"
+    - "ffprobe and visual final check"
+  governed:
+    - "secret scan"
+    - "feature branch and immutable version"
+    - "clean install discovery"
+

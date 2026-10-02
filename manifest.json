@@ -1,0 +1,60 @@
+{
+  "name": "lvsea-kepuvideo",
+  "version": "0.1.0",
+  "owner": "海洋哥 / lhylvsea",
+  "updated_at": "2026-10-03",
+  "review_due": "2027-01-03",
+  "status": "active",
+  "maturity_tier": "governed",
+  "lifecycle_stage": "library",
+  "context_budget_tier": "production",
+  "review_cadence": "quarterly",
+  "upstream_inspiration": "https://x.com/yyn1748762/status/2105835330406654424; https://github.com/heygen-com/hyperframes; https://github.com/lhylvsea/lvsea-writing; https://github.com/lhylvsea/lvsea-video",
+  "upstream_sync": {
+    "source_article_id": "2105651241519038464",
+    "source_reviewed_at": "2026-10-03",
+    "lvsea_writing_reviewed_version": "0.4.0",
+    "policy": "semantic adoption; replace humanizer-zh with lvsea-writing; do not copy adjacent skills wholesale"
+  },
+  "intent": {
+    "job_to_be_done": "把中文科普主题、文章或脚本转成以真实配音时间轴驱动的 HyperFrames 知识视频工程，并在最后用 lvsea-writing 做事实保真的口播去模板编辑。",
+    "target_users": ["海洋哥", "中文科普内容作者", "制造业知识传播者", "Codex/Agent Skill 使用者"],
+    "inputs": ["topic", "article", "web_source", "script", "authorized_assets", "target_duration", "audience", "format_requirements"],
+    "outputs": ["brief", "article", "evidence ledger", "script", "writing review", "voice previews", "voice audio", "SRT", "storyboard", "HyperFrames project", "preview", "final MP4", "QA report"],
+    "exclusions": ["AI detector evasion", "fabricated facts or experience", "handdrawn or collage style", "existing-footage editing", "avatar or voice cloning", "automatic paid provider calls", "automatic social publishing", "one-off prompt-only requests"]
+  },
+  "risk": {
+    "output_risk": "medium",
+    "execution_risk": "medium",
+    "trust_boundary": "user-source-local-tools-and-explicit-providers"
+  },
+  "permissions": {
+    "network": "read-only source research by default; TTS/provider/network uploads only when explicitly required and authorized",
+    "file_write": "write only the requested video project and this package during package creation",
+    "subprocess": "local Python checks, edge-tts, ffmpeg/ffprobe and installed HyperFrames commands; do not run unreviewed remote installers",
+    "secrets": "read provider credentials only from environment variables when explicitly authorized; never write them to artifacts"
+  },
+  "target_platforms": ["openai", "generic", "claude", "agent-skills-compatible", "vscode"],
+  "factory_components": ["references", "scripts", "evals", "reports", "tests"],
+  "dependencies": {
+    "required_for_full_run": ["Node.js 22+", "npm/npx", "FFmpeg", "ffprobe", "HyperFrames", "lvsea-writing"],
+    "default_voice_path": "edge-tts",
+    "optional": ["imagegen", "licensed local media", "authorized TTS provider"]
+  },
+  "release_gates": [
+    "source_and_intent_capture",
+    "adjacent_skill_review",
+    "humanizer_replacement_is_explicit",
+    "single_root_entrypoint",
+    "trigger_regression",
+    "package_validation",
+    "context_budget",
+    "skill_ir",
+    "secret_scan",
+    "rollback_boundary",
+    "feature_branch_and_release",
+    "clean_install_discovery",
+    "provider_and_human_video_evidence_is_not_overclaimed"
+  ]
+}
+
